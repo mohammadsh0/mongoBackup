@@ -210,7 +210,7 @@ function main() {
 }
 // For testing
 // main();
-const cronTime = '0 1 * * sun';
+const cronTime = '0 1 * * sun,wed';
 node_cron_1.default.schedule(cronTime, () => {
     main();
 }, {

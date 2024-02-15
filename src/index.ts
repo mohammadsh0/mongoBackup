@@ -234,7 +234,7 @@ function main() {
 // For testing
 // main();
 
-const cronTime = '0 1 * * sun';
+const cronTime = '0 1 * * sun,wed';
 cron.schedule(
   cronTime,
   () => {
