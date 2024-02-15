@@ -1,0 +1,40 @@
+{
+  "name": "mongobackup",
+  "version": "1.0.0",
+  "description": "Backup mongoDB and transfer to a remote site",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammadsh0/mongoBackup.git"
+  },
+  "keywords": [
+    "mongodb",
+    "backup",
+    "transfer"
+  ],
+  "author": "mohammadsh0",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mohammadsh0/mongoBackup/issues"
+  },
+  "homepage": "https://github.com/mohammadsh0/mongoBackup#readme",
+  "dependencies": {
+    "dotenv": "^16.4.4",
+    "mongodb": "^6.3.0",
+    "node-cron": "^3.0.3",
+    "ssh2-sftp-client": "^10.0.3"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^20.11.17",
+    "@types/node-cron": "^3.0.11",
+    "@types/ssh2-sftp-client": "^9.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}
