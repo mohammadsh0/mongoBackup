@@ -31,6 +31,7 @@ const remoteConnection = {
 };
 const backupFolder = process.env.localBackupFolder;
 const timeZone = process.env.timeZone;
+const cronTime = process.env.cronTime;
 class MongoBackupTransfer {
     constructor(connection) {
         _MongoBackupTransfer_instances.add(this);
@@ -210,9 +211,16 @@ function main() {
 }
 // For testing
 // main();
-const cronTime = '0 1 * * sun,wed';
-node_cron_1.default.schedule(cronTime, () => {
-    main();
-}, {
-    timezone: timeZone,
-});
+if (!cronTime) {
+    throw new Error("Crontime not specified");
+}
+else {
+    if (!node_cron_1.default.validate(cronTime)) {
+        throw new Error("Crontime isn't valid!");
+    }
+    node_cron_1.default.schedule(cronTime, () => {
+        main();
+    }, {
+        timezone: timeZone,
+    });
+}
