@@ -36,6 +36,7 @@ const remoteConnection: RemoteTransfer = {
 };
 const backupFolder: string | undefined = process.env.localBackupFolder;
 const timeZone: string | undefined = process.env.timeZone;
+const cronTime = process.env.cronTime;
 
 class MongoBackupTransfer {
   mongoUser: string | undefined;
@@ -169,7 +170,7 @@ class MongoBackupTransfer {
       });
       mongoDump.stderr.on('end', () => {
         resolve('backup done');
-      })
+      });
     });
   }
 
@@ -234,13 +235,19 @@ function main() {
 // For testing
 // main();
 
-const cronTime = '0 1 * * sun,wed';
-cron.schedule(
-  cronTime,
-  () => {
-    main();
-  },
-  {
-    timezone: timeZone,
+if (!cronTime) {
+  throw new Error("Crontime not specified")
+} else {
+  if (!cron.validate(cronTime)) {
+    throw new Error("Crontime isn't valid!")
   }
-);
+  cron.schedule(
+    cronTime,
+    () => {
+      main();
+    },
+    {
+      timezone: timeZone,
+    }
+  );
+}
