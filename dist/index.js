@@ -9,7 +9,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _MongoBackupTransfer_instances, _MongoBackupTransfer_dateAndTimeForFolderName, _MongoBackupTransfer_mkdirIfNotExists;
 Object.defineProperty(exports, "__esModule", { value: true });
-require('dotenv').config();
+require("dotenv/config");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const child_process_1 = __importDefault(require("child_process"));
