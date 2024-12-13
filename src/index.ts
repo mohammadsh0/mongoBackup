@@ -53,7 +53,7 @@ class MongoBackupTransfer {
     this.mongoPassword = connection.pass;
     this.backupDir = '';
     this.client = new MongoClient(
-      `mongodb://${this.mongoUser}:${this.mongoPassword}@${this.mongoHost}:${this.mongoPort}`
+      `mongodb://${this.mongoUser}:${this.mongoPassword}@${this.mongoHost}:${this.mongoPort}/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
     );
     this.databases = {};
   }
