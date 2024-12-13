@@ -245,14 +245,13 @@ if (!cronTime) {
   if (!cron.validate(cronTime)) {
     throw new Error("Crontime isn't valid!")
   }
-  main();
-  // cron.schedule(
-  //   cronTime,
-  //   () => {
-  //     main();
-  //   },
-  //   {
-  //     timezone: timeZone,
-  //   }
-  // );
+  cron.schedule(
+    cronTime,
+    () => {
+      main();
+    },
+    {
+      timezone: timeZone,
+    }
+  );
 }
