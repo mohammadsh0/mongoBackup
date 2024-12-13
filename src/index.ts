@@ -55,6 +55,7 @@ class MongoBackupTransfer {
     this.client = new MongoClient(
       `mongodb://${this.mongoUser}:${this.mongoPassword}@${this.mongoHost}:${this.mongoPort}/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
     );
+    console.log(this.client)
     this.databases = {};
   }
 
@@ -151,8 +152,11 @@ class MongoBackupTransfer {
     // isn't going to work.
     return new Promise((resolve: (value: string) => void, reject) => {
       let mongoDump = child_process.spawn('mongodump', [
-        '--uri',
-        `mongodb://${this.mongoUser}:${this.mongoPassword}@${this.mongoHost}:${this.mongoPort}/?authSource=admin&readPreference=primary`,
+        '--username',
+        `${this.mongoUser}`,
+        '--password',
+        `${this.mongoPassword}`,
+        `mongodb://${this.mongoHost}:${this.mongoPort}`,
         '--out',
         `${this.backupDir}`,
         '--gzip',
@@ -241,13 +245,14 @@ if (!cronTime) {
   if (!cron.validate(cronTime)) {
     throw new Error("Crontime isn't valid!")
   }
-  cron.schedule(
-    cronTime,
-    () => {
-      main();
-    },
-    {
-      timezone: timeZone,
-    }
-  );
+  main();
+  // cron.schedule(
+  //   cronTime,
+  //   () => {
+  //     main();
+  //   },
+  //   {
+  //     timezone: timeZone,
+  //   }
+  // );
 }
